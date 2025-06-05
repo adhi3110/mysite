@@ -1,0 +1,11 @@
+@for (itemKey of cqItemsOrder(); track itemKey) {
+  <aem-model-provider
+    [cqItem]="getItem(itemKey)"
+    [cqPath]="getDataPath(itemKey)"
+    [itemName]="itemKey"/>
+}
+
+@if (isInEditMode()) {
+  <div [attr.data-cq-data-path]="placeHolderPath()"
+       [class]="placeHolderClassName"></div>
+}
