@@ -4,7 +4,7 @@ import {AEMContainerComponentPropertiesSignal} from '../interface';
 import {Model} from '@adobe/aem-spa-page-model-manager';
 import {Utils} from '../utils';
 import {Constants} from '../constants';
-import {AemModelProviderComponent} from '../aem-model-provider/aem-model-provider.component';
+import {AemModelProviderComponent} from '@editable-components/aem-model-provider';
 
 @Component({
   selector: 'aem-container',

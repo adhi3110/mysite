@@ -1,8 +1,8 @@
 import {ChangeDetectionStrategy, Component, input} from '@angular/core';
 import {
   AemAllowedComponentsContainerComponent
-} from '../aem-allowed-components-container/aem-allowed-components-container.component';
-import {AemModelProviderComponent} from '../aem-model-provider/aem-model-provider.component';
+} from '@editable-components/aem-allowed-components-container';
+import {AemModelProviderComponent} from '@editable-components/aem-model-provider';
 import {Constants} from '../constants';
 
 @Component({

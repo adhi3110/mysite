@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, computed, input} from '@angular/core';
-import {AemContainerComponent} from '../aem-container/aem-container.component';
+import {AemContainerComponent} from '@editable-components/aem-container';
 import {AemAllowedComponentsContainerComponentProperties, AllowedComponents} from '../interface';
 import {Constants} from '../constants';
 

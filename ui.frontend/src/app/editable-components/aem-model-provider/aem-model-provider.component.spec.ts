@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AemModelProviderComponent } from './aem-model-provider.component';
+import { AemModelProviderComponent } from '@editable-components';
 
 describe('AemModelProviderComponent', () => {
   let component: AemModelProviderComponent;

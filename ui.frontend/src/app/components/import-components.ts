@@ -1,6 +1,4 @@
-import {LazyMapTo, MapTo} from '../core/component-mapping';
-import {AemContainerComponent} from '../core/aem-container/aem-container.component';
-import {AemResponsivegridComponent} from '../core/aem-responsivegrid/aem-responsivegrid.component';
+import {LazyMapTo, MapTo, AemContainerComponent, AemResponsivegridComponent} from '@editable-components';
 
 
 // import {TitleV2Component, TitleV2IsEmptyFn} from '@adobe/aem-core-components-angular-base/authoring/title/v2';

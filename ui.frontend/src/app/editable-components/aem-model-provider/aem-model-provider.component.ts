@@ -14,7 +14,7 @@ import {
 import {Model, ModelManager, PathUtils} from '@adobe/aem-spa-page-model-manager';
 import {Utils} from '../utils';
 import {Constants} from '../constants';
-import {AemDirectiveComponent} from '../aem-component/aem-component.directive';
+import {AemDirectiveComponent} from '@editable-components/aem-component';
 
 @Component({
   selector: 'aem-model-provider,[aemModelProvider]',

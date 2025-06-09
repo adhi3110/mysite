@@ -1,6 +1,6 @@
 import {Routes, UrlMatchResult, UrlSegment} from '@angular/router';
 import {PageComponent} from './components/page/page.component';
-import {AemPageDataResolver} from './core/AemPageDataResolver';
+import {AemPageDataResolver} from '@editable-components';
 
 // @ts-ignore
 export function AemPageMatcher(url: UrlSegment[]): UrlMatchResult {

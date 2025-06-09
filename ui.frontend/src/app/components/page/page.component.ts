@@ -1,8 +1,7 @@
-import { Constants } from '../../core/constants';
 import {ChangeDetectionStrategy, Component, inject, signal, WritableSignal} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ModelManagerService} from '../model-manager.service';
-import {AEMPageComponent} from '../../core/aem-page/aem-page.component';
+import {AEMPageComponent, Constants} from '@editable-components';
 
 @Component({
   selector: 'app-main',

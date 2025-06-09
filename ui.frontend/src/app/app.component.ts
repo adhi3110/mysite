@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, DoCheck} from '@angular/core';
 import {ModelManager} from '@adobe/aem-spa-page-model-manager';
-import {Constants} from './core/constants';
+import {Constants} from '@editable-components';
 
 import './components/import-components'
 import {RouterModule} from '@angular/router';
@@ -13,10 +13,11 @@ import {RouterModule} from '@angular/router';
   ],
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements DoCheck {
   items: any;
   itemsOrder: any;
   path: any;
+
   constructor() {
     ModelManager.initialize().then(this.updateData);
   }
@@ -24,5 +25,9 @@ export class AppComponent {
     this.path = pageModel[Constants.PATH_PROP];
     this.items = pageModel[Constants.ITEMS_PROP];
     this.itemsOrder = pageModel[Constants.ITEMS_ORDER_PROP];
+  }
+
+  ngDoCheck(): void {
+    console.count("Change Detection")
   }
 }

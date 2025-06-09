@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {Constants} from '../constants';
-import {AemContainerComponent} from '../aem-container/aem-container.component';
-import {AemModelProviderComponent} from '../aem-model-provider/aem-model-provider.component';
+import {AemContainerComponent,AemModelProviderComponent} from '@editable-components';
 
 @Component({
   selector: 'aem-page',

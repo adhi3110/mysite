@@ -87,7 +87,7 @@ export interface AEMContainerComponentProperties extends MappedComponentProperti
   /**
    * Map of model items included in the current container
    */
-  cqItems: { [key: string]: Model };
+  cqItems: Record<string, Model>
   /**
    * Array of model item keys
    */
@@ -107,7 +107,7 @@ export interface AEMContainerComponentPropertiesSignal extends MappedComponentPr
   /**
    * Map of model items included in the current container
    */
-  cqItems: InputSignal<{ [key: string]: Model }>;
+  cqItems: InputSignal<Record<string, Model>>;
   /**
    * Array of model item keys
    */

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AemContainerComponent } from './aem-container.component';
+import { AemContainerComponent } from '@editable-components';
 
 describe('AemContainerComponent', () => {
   let component: AemContainerComponent;

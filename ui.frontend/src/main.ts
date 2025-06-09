@@ -14,10 +14,10 @@ if (environment.production) {
 }
 
 const initialStateScriptTag = document.getElementById('__AEM_STATE__');
-if(!!initialStateScriptTag) {
+if(initialStateScriptTag) {
   try {
     const initialState = JSON.parse(initialStateScriptTag.innerHTML);
-    // @ts-ignore
+    // @ts-expect-error: initialModel is not part of window
     window.initialModel = initialState.rootModel;
     initialStateScriptTag.remove();
   }catch(err){

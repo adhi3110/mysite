@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AemResponsivegridComponent } from './aem-responsivegrid.component';
+import { AemResponsivegridComponent } from '@editable-components';
 
 describe('AemResponsivegridComponent', () => {
   let component: AemResponsivegridComponent;
