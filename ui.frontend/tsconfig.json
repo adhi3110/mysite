@@ -15,12 +15,8 @@
     "target": "ES2022",
     "module": "preserve",
     "paths": {
-      "@editable-components/*": [
-        "./src/app/editable-components/*"
-      ],
-      "@editable-components": [
-        "./src/app/editable-components"
-      ]
+      "@editable-components/*": ["./src/app/editable-components/*"],
+      "@editable-components": ["./src/app/editable-components"]
     }
   },
   "angularCompilerOptions": {

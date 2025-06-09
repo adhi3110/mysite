@@ -1,28 +1,35 @@
 import {
   AfterViewInit,
   ChangeDetectorRef,
-  ComponentRef, computed,
+  ComponentRef,
+  computed,
   Directive,
   inject,
-  input, model,
+  input,
+  model,
   OnChanges,
   OnDestroy,
-  OnInit, Renderer2, Signal, Type, ViewContainerRef
+  OnInit,
+  Renderer2,
+  Signal,
+  Type,
+  ViewContainerRef,
 } from '@angular/core';
-import {EditConfig, MappedComponentPropertiesSignal} from '../interface';
-import {Model} from '@adobe/aem-spa-page-model-manager';
-import {ComponentMapping} from '../component-mapping';
-import {Constants} from '../constants';
-import {Utils} from '../utils';
+import { EditConfig, MappedComponentPropertiesSignal } from '../interface';
+import { Model } from '@adobe/aem-spa-page-model-manager';
+import { ComponentMapping } from '../component-mapping';
+import { Constants } from '../constants';
+import { Utils } from '../utils';
 
 @Directive({
-  selector: '[aemComponent]'
+  selector: '[aemComponent]',
 })
-export class AemDirectiveComponent implements AfterViewInit, OnInit, OnDestroy, OnChanges {
+export class AemDirectiveComponent
+  implements AfterViewInit, OnInit, OnDestroy, OnChanges
+{
+  changeDetectorRef = inject(ChangeDetectorRef);
 
-  changeDetectorRef = inject(ChangeDetectorRef)
-
-  viewContainer = inject(ViewContainerRef)
+  viewContainer = inject(ViewContainerRef);
 
   renderer = inject(Renderer2);
 
@@ -37,14 +44,17 @@ export class AemDirectiveComponent implements AfterViewInit, OnInit, OnDestroy, 
   loaded = model<boolean>(false);
 
   type: Signal<string | undefined> = computed((): string | undefined => {
-    return this.cqItem() && this.cqItem()?.[':type']
+    return this.cqItem() && this.cqItem()?.[':type'];
   });
 
   private _component: ComponentRef<MappedComponentPropertiesSignal> | undefined;
 
   async ngOnInit() {
     if (this.type()) {
-      const mappedFn: Type<MappedComponentPropertiesSignal> = ComponentMapping.get<MappedComponentPropertiesSignal>(<string>this.type());
+      const mappedFn: Type<MappedComponentPropertiesSignal> =
+        ComponentMapping.get<MappedComponentPropertiesSignal>(
+          this.type() as string,
+        );
 
       if (mappedFn) {
         this.renderComponent(mappedFn);
@@ -54,11 +64,13 @@ export class AemDirectiveComponent implements AfterViewInit, OnInit, OnDestroy, 
     } else {
       console.warn('no type on ' + this.cqPath);
     }
-
   }
 
   async initializeAsync() {
-    const lazyMappedPromise: Promise<Type<MappedComponentPropertiesSignal>> = ComponentMapping.lazyGet<MappedComponentPropertiesSignal>(<string>this.type());
+    const lazyMappedPromise: Promise<Type<MappedComponentPropertiesSignal>> =
+      ComponentMapping.lazyGet<MappedComponentPropertiesSignal>(
+        this.type() as string,
+      );
 
     try {
       const LazyResolvedComponent = await lazyMappedPromise;
@@ -75,7 +87,9 @@ export class AemDirectiveComponent implements AfterViewInit, OnInit, OnDestroy, 
    *
    * @param componentDefinition The component definition to render
    */
-  private renderComponent(componentDefinition: Type<MappedComponentPropertiesSignal>) {
+  private renderComponent(
+    componentDefinition: Type<MappedComponentPropertiesSignal>,
+  ) {
     if (componentDefinition) {
       this.viewContainer.clear();
       this._component = this.viewContainer.createComponent(componentDefinition);
@@ -103,16 +117,20 @@ export class AemDirectiveComponent implements AfterViewInit, OnInit, OnDestroy, 
         // :myProperty => cqMyProperty
         const tempKey = propKey.substring(1);
 
-        propKey = 'cq' + tempKey.substring(0, 1).toUpperCase() + tempKey.substring(1);
+        propKey =
+          'cq' + tempKey.substring(0, 1).toUpperCase() + tempKey.substring(1);
       }
 
       // @ts-expect-error - this is a workaround for the fact that the type of the input is already checked
       this._component.setInput(propKey, this.cqItem()[key]);
     });
 
-    this._component.setInput('cqPath' ,this.cqPath());
+    this._component.setInput('cqPath', this.cqPath());
     // @ts-expect-error - this is a workaround for the fact that the type of the input is already checked
-    this._component.setInput('itemName', this.itemName() || (this.cqItem() && this.cqItem().id));
+    this._component.setInput(
+      'itemName',
+      this.itemName() || (this.cqItem() && this.cqItem().id),
+    );
     this.includeAppliedCSSClasses();
 
     let editConfig;
@@ -134,7 +152,11 @@ export class AemDirectiveComponent implements AfterViewInit, OnInit, OnDestroy, 
    * @param editConfig - the edit config of the directive
    */
   private usePlaceholder(editConfig: EditConfig) {
-    return editConfig.isEmpty && typeof editConfig.isEmpty === 'function' && editConfig.isEmpty(this.cqItem);
+    return (
+      editConfig.isEmpty &&
+      typeof editConfig.isEmpty === 'function' &&
+      editConfig.isEmpty(this.cqItem)
+    );
   }
 
   /**
@@ -144,11 +166,24 @@ export class AemDirectiveComponent implements AfterViewInit, OnInit, OnDestroy, 
    */
   private setupPlaceholder(editConfig: EditConfig) {
     if (this.usePlaceholder(editConfig)) {
-      this.renderer.addClass(this._component!.location.nativeElement, Constants.PLACEHOLDER_CLASS_NAME);
-      this.renderer.setAttribute(this._component!.location.nativeElement, 'data-emptytext', editConfig.emptyLabel || '');
+      this.renderer.addClass(
+        this._component!.location.nativeElement,
+        Constants.PLACEHOLDER_CLASS_NAME,
+      );
+      this.renderer.setAttribute(
+        this._component!.location.nativeElement,
+        'data-emptytext',
+        editConfig.emptyLabel || '',
+      );
     } else {
-      this.renderer.removeClass(this._component!.location.nativeElement, Constants.PLACEHOLDER_CLASS_NAME);
-      this.renderer.removeAttribute(this._component!.location.nativeElement, 'data-emptytext');
+      this.renderer.removeClass(
+        this._component!.location.nativeElement,
+        Constants.PLACEHOLDER_CLASS_NAME,
+      );
+      this.renderer.removeAttribute(
+        this._component!.location.nativeElement,
+        'data-emptytext',
+      );
     }
   }
 
@@ -157,10 +192,15 @@ export class AemDirectiveComponent implements AfterViewInit, OnInit, OnDestroy, 
    */
   private includeAppliedCSSClasses() {
     // @ts-expect-error - this is a workaround for the fact that the type of the input is already checked
-    const appliedCssClassNames = this.cqItem()[Constants.APPLIED_CLASS_NAMES] || '';
+    const appliedCssClassNames =
+      this.cqItem()[Constants.APPLIED_CLASS_NAMES] || '';
 
     if (appliedCssClassNames && this._component) {
-      this.renderer.setAttribute(this._component.location.nativeElement, 'class', appliedCssClassNames);
+      this.renderer.setAttribute(
+        this._component.location.nativeElement,
+        'class',
+        appliedCssClassNames,
+      );
     }
   }
 
@@ -176,10 +216,17 @@ export class AemDirectiveComponent implements AfterViewInit, OnInit, OnDestroy, 
           const classes = this.itemAttrs()[key].split(' ');
 
           classes.forEach((itemClass: string) => {
-            this.renderer.addClass(this._component!.location.nativeElement, itemClass);
+            this.renderer.addClass(
+              this._component!.location.nativeElement,
+              itemClass,
+            );
           });
         } else {
-          this.renderer.setAttribute(this._component!.location.nativeElement, key, this.itemAttrs()[key]);
+          this.renderer.setAttribute(
+            this._component!.location.nativeElement,
+            key,
+            this.itemAttrs()[key],
+          );
         }
       });
     }
@@ -198,6 +245,4 @@ export class AemDirectiveComponent implements AfterViewInit, OnInit, OnDestroy, 
       this._component.destroy();
     }
   }
-
-
 }

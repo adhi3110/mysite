@@ -40,6 +40,3 @@ Furthermore, an AEM ClientLib is generated from the app using the [`aem-clientli
 ## Browser Support
 
 By default, this project uses [Browserslist](https://github.com/browserslist/browserslist)'s `defaults` option to identify target browsers. Additionally, it includes polyfills for modern language features to support older browsers (e.g. Internet Explorer 11). If supporting such browsers isn't a requirement, the polyfill dependencies and imports can be removed.
-
-
-

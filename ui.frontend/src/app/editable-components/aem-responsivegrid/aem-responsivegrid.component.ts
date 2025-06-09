@@ -1,24 +1,22 @@
-import {ChangeDetectionStrategy, Component, input} from '@angular/core';
-import {
-  AemAllowedComponentsContainerComponent
-} from '@editable-components/aem-allowed-components-container';
-import {AemModelProviderComponent} from '@editable-components/aem-model-provider';
-import {Constants} from '../constants';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { AemAllowedComponentsContainerComponent } from '@editable-components/aem-allowed-components-container';
+import { AemModelProviderComponent } from '@editable-components/aem-model-provider';
+import { Constants } from '../constants';
+import { Model } from '@adobe/aem-spa-page-model-manager';
 
 @Component({
   selector: 'aem-responsivegrid',
   imports: [AemModelProviderComponent],
   templateUrl: './aem-responsivegrid.component.html',
   styleUrl: './aem-responsivegrid.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AemResponsivegridComponent extends AemAllowedComponentsContainerComponent{
-
+export class AemResponsivegridComponent extends AemAllowedComponentsContainerComponent {
   cqType = input<string>('');
 
   gridClassNames = input<string>('');
 
-  columnClassNames = input<{ [key: string]: string }>({});
+  columnClassNames = input<Record<string, string>>({});
 
   columnCount = input<number>(0);
 
@@ -41,7 +39,7 @@ export class AemResponsivegridComponent extends AemAllowedComponentsContainerCom
    * Returns the class names of the responsive grid based on the data from the cqModel
    */
   getHostClassNames(): string {
-    let classNames = 'aem-container'
+    let classNames = 'aem-container';
 
     if (this.classNames()) {
       classNames += ' ' + (this.classNames() || '');
@@ -56,10 +54,13 @@ export class AemResponsivegridComponent extends AemAllowedComponentsContainerCom
    * @param path - the provided path to aggregate with the container path
    */
   getAttrDataPath(path: string): string | null {
-    const item = this.getItem(path);
+    const item: Model = this.getItem(path);
 
-    // @ts-ignore
-    if (item && item[Constants.TYPE_PROP] === 'wcm/foundation/components/responsivegrid') {
+    if (
+      item &&
+      item[Constants.TYPE_PROP as keyof Model] ===
+        'wcm/foundation/components/responsivegrid'
+    ) {
       // We don't want to add the path for the wrapper for a reponsivegrid
       // The reponsivegrid adds the path on it's own
       return null;

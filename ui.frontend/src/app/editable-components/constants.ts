@@ -10,10 +10,9 @@
  * governing permissions and limitations under the License.
  */
 
-import {Constants as PMConstants} from '@adobe/aem-spa-page-model-manager';
+import { Constants as PMConstants } from '@adobe/aem-spa-page-model-manager';
 
 export const Constants = {
-
   /**
    * Class names associated with a new section component
    *
@@ -73,8 +72,7 @@ export const Constants = {
 
   PLACEHOLDER_ITEM_NAME: '*',
 
-  PLACEHOLDER_CLASS_NAME:'cq-placeholder',
+  PLACEHOLDER_CLASS_NAME: 'cq-placeholder',
 
-  ALLOWED_PLACEHOLDER_CLASS_NAMES: 'aem-AllowedComponent--list'
-
+  ALLOWED_PLACEHOLDER_CLASS_NAMES: 'aem-AllowedComponent--list',
 };

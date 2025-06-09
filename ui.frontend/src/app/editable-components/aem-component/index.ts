@@ -1,1 +1,1 @@
-export * from './aem-component.directive'
+export * from './aem-component.directive';

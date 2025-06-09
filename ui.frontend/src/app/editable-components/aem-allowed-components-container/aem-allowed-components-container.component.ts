@@ -1,16 +1,27 @@
-import {ChangeDetectionStrategy, Component, computed, input} from '@angular/core';
-import {AemContainerComponent} from '@editable-components/aem-container';
-import {AemAllowedComponentsContainerComponentProperties, AllowedComponents} from '../interface';
-import {Constants} from '../constants';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+} from '@angular/core';
+import { AemContainerComponent } from '@editable-components/aem-container';
+import {
+  AemAllowedComponentsContainerComponentProperties,
+  AllowedComponents,
+} from '../interface';
+import { Constants } from '../constants';
 
 @Component({
   selector: 'aem-allowed-components-container',
   imports: [],
   templateUrl: './aem-allowed-components-container.component.html',
   styleUrl: './aem-allowed-components-container.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AemAllowedComponentsContainerComponent extends AemContainerComponent implements AemAllowedComponentsContainerComponentProperties {
+export class AemAllowedComponentsContainerComponent
+  extends AemContainerComponent
+  implements AemAllowedComponentsContainerComponentProperties
+{
   title = input('');
 
   emptyLabel = input('No allowed components');
@@ -18,24 +29,38 @@ export class AemAllowedComponentsContainerComponent extends AemContainerComponen
   allowedComponents = input<AllowedComponents>({
     applicable: false,
     components: [],
-  })
+  });
 
   allowedComponentListLabel = computed(() => {
-    return this.allowedComponents() && this.allowedComponents().components && this.allowedComponents().components.length > 0 ? this.title() : this.emptyLabel();
-  })
+    return this.allowedComponents() &&
+      this.allowedComponents().components &&
+      this.allowedComponents().components.length > 0
+      ? this.title()
+      : this.emptyLabel();
+  });
 
-  allowedComponentss = computed(() => this.allowedComponents().components || [])
+  allowedComponentss = computed(
+    () => this.allowedComponents().components || [],
+  );
 
   allowedComponentListTitleClassNames = 'aem-AllowedComponent--title';
 
-  allowedComponentClassNames = 'aem-AllowedComponent--component cq-placeholder placeholder';
+  allowedComponentClassNames =
+    'aem-AllowedComponent--component cq-placeholder placeholder';
 
   isAllowedComponentsApplicable(): boolean {
-    return this.isInEditMode() && this.allowedComponents() && this.allowedComponents().applicable;
+    return (
+      this.isInEditMode() &&
+      this.allowedComponents() &&
+      this.allowedComponents().applicable
+    );
   }
 
   getAllowedComponentListPlaceholderClassNames(): string {
-    return this.placeHolderClassName + ' ' + Constants.ALLOWED_PLACEHOLDER_CLASS_NAMES;
+    return (
+      this.placeHolderClassName +
+      ' ' +
+      Constants.ALLOWED_PLACEHOLDER_CLASS_NAMES
+    );
   }
-
 }

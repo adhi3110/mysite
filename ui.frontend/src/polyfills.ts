@@ -19,4 +19,4 @@
 // supported
 import 'custom-event-polyfill';
 import 'whatwg-fetch';
-import 'zone.js'
+import 'zone.js';

@@ -9,24 +9,25 @@ import {
   signal,
   Signal,
   viewChild,
-  WritableSignal
+  WritableSignal,
 } from '@angular/core';
-import {Model, ModelManager, PathUtils} from '@adobe/aem-spa-page-model-manager';
-import {Utils} from '../utils';
-import {Constants} from '../constants';
-import {AemDirectiveComponent} from '@editable-components/aem-component';
+import {
+  Model,
+  ModelManager,
+  PathUtils,
+} from '@adobe/aem-spa-page-model-manager';
+import { Utils } from '../utils';
+import { Constants } from '../constants';
+import { AemDirectiveComponent } from '@editable-components/aem-component';
 
 @Component({
   selector: 'aem-model-provider,[aemModelProvider]',
-  imports: [
-    AemDirectiveComponent
-  ],
+  imports: [AemDirectiveComponent],
   templateUrl: './aem-model-provider.component.html',
   styleUrl: './aem-model-provider.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AemModelProviderComponent implements OnInit, OnDestroy{
-
+export class AemModelProviderComponent implements OnInit, OnDestroy {
   cqPath = model<string>();
 
   cqItem = model<Model>();
@@ -39,7 +40,9 @@ export class AemModelProviderComponent implements OnInit, OnDestroy{
 
   updateDataPath = output<any>();
 
-  aemComponent: Signal<AemDirectiveComponent | undefined> = viewChild(AemDirectiveComponent)
+  aemComponent: Signal<AemDirectiveComponent | undefined> = viewChild(
+    AemDirectiveComponent,
+  );
 
   cqItemLoaded: WritableSignal<boolean> = signal(false);
 
@@ -47,11 +50,14 @@ export class AemModelProviderComponent implements OnInit, OnDestroy{
    * Updates the item data
    */
   updateItem(): void {
-    ModelManager.getData({ path: this.cqPath() }).then(model => {
+    ModelManager.getData({ path: this.cqPath() }).then((model) => {
       this.cqItemLoaded.set(true);
       this.cqItem.set(model);
       if (this.pagePath() && Utils.isInEditor()) {
-        PathUtils.dispatchGlobalCustomEvent(Constants.ASYNC_CONTENT_LOADED_EVENT, {});
+        PathUtils.dispatchGlobalCustomEvent(
+          Constants.ASYNC_CONTENT_LOADED_EVENT,
+          {},
+        );
       }
       if (this.aemComponent()) {
         this.aemComponent()?.changeDetectorRef.markForCheck();

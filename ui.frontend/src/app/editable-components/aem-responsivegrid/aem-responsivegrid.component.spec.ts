@@ -8,9 +8,8 @@ describe('AemResponsivegridComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AemResponsivegridComponent]
-    })
-    .compileComponents();
+      imports: [AemResponsivegridComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(AemResponsivegridComponent);
     component = fixture.componentInstance;

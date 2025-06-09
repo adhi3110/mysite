@@ -2,10 +2,13 @@
   <aem-model-provider
     [cqItem]="getItem(itemKey)"
     [cqPath]="getDataPath(itemKey)"
-    [itemName]="itemKey"/>
+    [itemName]="itemKey"
+  />
 }
 
 @if (isInEditMode()) {
-  <div [attr.data-cq-data-path]="placeHolderPath()"
-       [class]="placeHolderClassName"></div>
+  <div
+    [attr.data-cq-data-path]="placeHolderPath()"
+    [class]="placeHolderClassName"
+  ></div>
 }

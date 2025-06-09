@@ -1,6 +1,6 @@
-import {InputSignal} from '@angular/core';
-import {ComponentMapping} from './component-mapping';
-import {Model} from '@adobe/aem-spa-page-model-manager';
+import { InputSignal } from '@angular/core';
+import { ComponentMapping } from './component-mapping';
+import { Model } from '@adobe/aem-spa-page-model-manager';
 
 /**
  * Indicated whether force reload is turned on, forcing the model to be refetched on every MapTo instantiation.
@@ -64,7 +64,9 @@ export interface EditConfig<P extends MappedComponentProperties = any> {
  * EditConfiguration for a MappedComponent
  * @type <P> Type  of the MappedComponent, used in isEmpty
  */
-export interface EditConfigSignal<P extends MappedComponentPropertiesSignal = any> {
+export interface EditConfigSignal<
+  P extends MappedComponentPropertiesSignal = any,
+> {
   /**
    * Label to display if the component is considered empty in author mode
    */
@@ -82,12 +84,13 @@ export interface EditConfigSignal<P extends MappedComponentPropertiesSignal = an
 /**
  * Properties corresponding to the AEMContainerComponent
  */
-export interface AEMContainerComponentProperties extends MappedComponentProperties {
+export interface AEMContainerComponentProperties
+  extends MappedComponentProperties {
   componentMapping?: typeof ComponentMapping;
   /**
    * Map of model items included in the current container
    */
-  cqItems: Record<string, Model>
+  cqItems: Record<string, Model>;
   /**
    * Array of model item keys
    */
@@ -98,11 +101,11 @@ export interface AEMContainerComponentProperties extends MappedComponentProperti
   classNames: string;
 }
 
-
 /**
  * Properties corresponding to the AEMContainerComponent
  */
-export interface AEMContainerComponentPropertiesSignal extends MappedComponentPropertiesSignal {
+export interface AEMContainerComponentPropertiesSignal
+  extends MappedComponentPropertiesSignal {
   componentMapping?: typeof ComponentMapping;
   /**
    * Map of model items included in the current container
@@ -148,7 +151,8 @@ export interface AllowedComponents {
 /**
  * Properties for the allowed components container
  */
-export interface AemAllowedComponentsContainerComponentProperties extends AEMContainerComponentPropertiesSignal {
+export interface AemAllowedComponentsContainerComponentProperties
+  extends AEMContainerComponentPropertiesSignal {
   /**
    * List of allowed components for the container
    */
@@ -164,4 +168,3 @@ export interface AemAllowedComponentsContainerComponentProperties extends AEMCon
    */
   title: InputSignal<string>;
 }
-

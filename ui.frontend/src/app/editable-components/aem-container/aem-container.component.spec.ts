@@ -8,9 +8,8 @@ describe('AemContainerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AemContainerComponent]
-    })
-    .compileComponents();
+      imports: [AemContainerComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(AemContainerComponent);
     component = fixture.componentInstance;

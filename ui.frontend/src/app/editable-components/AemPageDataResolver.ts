@@ -14,7 +14,7 @@ import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 
 @Injectable()
-export class AemPageDataResolver implements Resolve < string > {
+export class AemPageDataResolver implements Resolve<string> {
   /**
    * Returns the absolute resource path without extension.
    * @example

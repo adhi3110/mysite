@@ -10,7 +10,11 @@
  * governing permissions and limitations under the License.
  */
 
-import { ActivatedRouteSnapshot, RouteReuseStrategy, DetachedRouteHandle } from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  RouteReuseStrategy,
+  DetachedRouteHandle,
+} from '@angular/router';
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
@@ -24,7 +28,12 @@ export class AemPageRouteReuseStrategy implements RouteReuseStrategy {
   }
 
   /** Not storing deteached route. */
-  store(route: ActivatedRouteSnapshot, detachedTree: DetachedRouteHandle): void { /* void */ }
+  store(
+    route: ActivatedRouteSnapshot,
+    detachedTree: DetachedRouteHandle,
+  ): void {
+    /* void */
+  }
 
   /** Determines if this route (and its subtree) should be reattached. */
   shouldAttach(route: ActivatedRouteSnapshot): boolean {
@@ -37,7 +46,10 @@ export class AemPageRouteReuseStrategy implements RouteReuseStrategy {
   }
 
   /** Determines if a route should be reused */
-  shouldReuseRoute(future: ActivatedRouteSnapshot, curr: ActivatedRouteSnapshot): boolean {
+  shouldReuseRoute(
+    future: ActivatedRouteSnapshot,
+    curr: ActivatedRouteSnapshot,
+  ): boolean {
     return false;
   }
 }

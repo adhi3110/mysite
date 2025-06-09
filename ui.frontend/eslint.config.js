@@ -2,6 +2,7 @@
 const eslint = require("@eslint/js");
 const tseslint = require("typescript-eslint");
 const angular = require("angular-eslint");
+const prettier = require("eslint-config-prettier/flat")
 
 module.exports = tseslint.config(
   {
@@ -11,6 +12,7 @@ module.exports = tseslint.config(
       ...tseslint.configs.recommended,
       ...tseslint.configs.stylistic,
       ...angular.configs.tsRecommended,
+      prettier
     ],
     processor: angular.processInlineTemplates,
     rules: {
@@ -18,7 +20,7 @@ module.exports = tseslint.config(
         "error",
         {
           type: "attribute",
-          prefix: "app",
+          prefix: ["app", "aem"],
           style: "camelCase",
         },
       ],
@@ -26,10 +28,11 @@ module.exports = tseslint.config(
         "error",
         {
           type: "element",
-          prefix: "app",
+          prefix: ["app", "aem"],
           style: "kebab-case",
         },
       ],
+      "@typescript-eslint/no-explicit-any": "warn",
     },
   },
   {
@@ -39,5 +42,5 @@ module.exports = tseslint.config(
       ...angular.configs.templateAccessibility,
     ],
     rules: {},
-  }
+  },
 );

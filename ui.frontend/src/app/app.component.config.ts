@@ -1,11 +1,15 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection } from '@angular/core';
-import {provideRouter, RouteReuseStrategy} from '@angular/router';
+import {
+  ApplicationConfig,
+  provideBrowserGlobalErrorListeners,
+  provideZonelessChangeDetection,
+} from '@angular/core';
+import { provideRouter, RouteReuseStrategy } from '@angular/router';
 
 import { routes } from './app.routes';
-import {AemPageDataResolver} from '@editable-components';
-import {AemPageRouteReuseStrategy} from '@editable-components';
-import {APP_BASE_HREF} from '@angular/common';
-import {ModelManagerService} from './components/model-manager.service';
+import { AemPageDataResolver } from '@editable-components';
+import { AemPageRouteReuseStrategy } from '@editable-components';
+import { APP_BASE_HREF } from '@angular/common';
+import { ModelManagerService } from './components/model-manager.service';
 
 export const appComponentConfig: ApplicationConfig = {
   providers: [
@@ -16,11 +20,11 @@ export const appComponentConfig: ApplicationConfig = {
     AemPageDataResolver,
     {
       provide: RouteReuseStrategy,
-      useClass: AemPageRouteReuseStrategy
+      useClass: AemPageRouteReuseStrategy,
     },
     {
       provide: APP_BASE_HREF,
-      useValue: '/'
-    }
-  ]
+      useValue: '/',
+    },
+  ],
 };

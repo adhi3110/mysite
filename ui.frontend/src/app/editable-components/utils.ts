@@ -34,11 +34,11 @@ const PREVIEW_MODE = 'preview';
  * @private
  */
 function isBrowser() {
-    try {
-        return typeof window !== 'undefined';
-    } catch {
-        return false;
-    }
+  try {
+    return typeof window !== 'undefined';
+  } catch {
+    return false;
+  }
 }
 
 /**
@@ -48,37 +48,39 @@ function isBrowser() {
  * @private
  */
 function getWCMMode() {
-    if (isBrowser()) {
-      const wcmModeMeta: HTMLMetaElement | null= document.head.querySelector(WCM_MODE_META_SELECTOR);
-      return wcmModeMeta && wcmModeMeta.content;
-    }
-    return;
+  if (isBrowser()) {
+    const wcmModeMeta: HTMLMetaElement | null = document.head.querySelector(
+      WCM_MODE_META_SELECTOR,
+    );
+    return wcmModeMeta && wcmModeMeta.content;
+  }
+  return;
 }
 
 /**
  * Helper functions for interacting with the AEM environment.
  */
 export const Utils = {
-    /**
-     * Is the app used in the context of the AEM Page editor.
-     */
-    isInEditor(): boolean {
-        const wcmMode = getWCMMode();
+  /**
+   * Is the app used in the context of the AEM Page editor.
+   */
+  isInEditor(): boolean {
+    const wcmMode = getWCMMode();
 
-        return !!wcmMode && (EDIT_MODE === wcmMode || PREVIEW_MODE === wcmMode);
-    },
+    return !!wcmMode && (EDIT_MODE === wcmMode || PREVIEW_MODE === wcmMode);
+  },
 
-    /**
-     * Determines the cqPath of a component given its props
-     *
-     * @private
-     * @returns cqPath of the component
-     */
-     getCQPath(pagePath: string, itemPath?: string): string {
-        let path = (itemPath ? `${pagePath}/jcr:content/${itemPath}` : pagePath);
+  /**
+   * Determines the cqPath of a component given its props
+   *
+   * @private
+   * @returns cqPath of the component
+   */
+  getCQPath(pagePath: string, itemPath?: string): string {
+    let path = itemPath ? `${pagePath}/jcr:content/${itemPath}` : pagePath;
 
-        path = path.replace(/\/+/g, '/');
+    path = path.replace(/\/+/g, '/');
 
-        return path;
-    }
+    return path;
+  },
 };

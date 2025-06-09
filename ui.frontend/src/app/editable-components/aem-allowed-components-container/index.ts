@@ -1,1 +1,1 @@
-export * from './aem-allowed-components-container.component'
+export * from './aem-allowed-components-container.component';

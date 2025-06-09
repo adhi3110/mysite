@@ -1,25 +1,33 @@
-
 @if (isAllowedComponentsApplicable()) {
   <div [class]="getAllowedComponentListPlaceholderClassNames()">
-    <div [attr.data-text]="allowedComponentListLabel()" [class]="allowedComponentListTitleClassNames"></div>
+    <div
+      [attr.data-text]="allowedComponentListLabel()"
+      [class]="allowedComponentListTitleClassNames"
+    ></div>
     @for (allowedComponent of allowedComponentss(); track $index) {
-      <div [attr.data-cq-data-path]="allowedComponent.path"
-           [attr.data-emptytext]="allowedComponent.title"
-           [class]="allowedComponentClassNames"></div>
+      <div
+        [attr.data-cq-data-path]="allowedComponent.path"
+        [attr.data-emptytext]="allowedComponent.title"
+        [class]="allowedComponentClassNames"
+      ></div>
     }
   </div>
 } @else {
-  @for ( itemKey of cqItemsOrder();track itemKey) {
-    <div aemModelProvider
-         [cqItem]="getItem(itemKey)"
-         [cqPath]="getDataPath(itemKey)"
-         [itemName]="itemKey"
-         [class]="getColumnClassNames(itemKey)"
-         [attr.data-cq-data-path]="getAttrDataPath(itemKey)"></div>
+  @for (itemKey of cqItemsOrder(); track itemKey) {
+    <div
+      aemModelProvider
+      [cqItem]="getItem(itemKey)"
+      [cqPath]="getDataPath(itemKey)"
+      [itemName]="itemKey"
+      [class]="getColumnClassNames(itemKey)"
+      [attr.data-cq-data-path]="getAttrDataPath(itemKey)"
+    ></div>
   }
 
   @if (isInEditMode()) {
-    <div [attr.data-cq-data-path]="placeHolderPath()"
-         [class]="getPlaceholderClassNames()"></div>
+    <div
+      [attr.data-cq-data-path]="placeHolderPath()"
+      [class]="getPlaceholderClassNames()"
+    ></div>
   }
 }

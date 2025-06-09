@@ -1,8 +1,8 @@
-import {bootstrapApplication} from '@angular/platform-browser';
-import {environment} from './app/environments/environment';
-import {enableProdMode} from '@angular/core'
-import {AppComponent} from './app/app.component';
-import {appComponentConfig} from './app/app.component.config';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { environment } from './app/environments/environment';
+import { enableProdMode } from '@angular/core';
+import { AppComponent } from './app/app.component';
+import { appComponentConfig } from './app/app.component.config';
 
 if (environment.production) {
   enableProdMode();
@@ -14,16 +14,17 @@ if (environment.production) {
 }
 
 const initialStateScriptTag = document.getElementById('__AEM_STATE__');
-if(initialStateScriptTag) {
+if (initialStateScriptTag) {
   try {
     const initialState = JSON.parse(initialStateScriptTag.innerHTML);
     // @ts-expect-error: initialModel is not part of window
     window.initialModel = initialState.rootModel;
     initialStateScriptTag.remove();
-  }catch(err){
+  } catch (err) {
     console.warn('failed to hydrate app', err);
   }
 }
 
-bootstrapApplication(AppComponent, appComponentConfig)
-  .catch((err) => console.error(err));
+bootstrapApplication(AppComponent, appComponentConfig).catch((err) =>
+  console.error(err),
+);

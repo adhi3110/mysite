@@ -8,9 +8,8 @@ describe('AemModelProviderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AemModelProviderComponent]
-    })
-    .compileComponents();
+      imports: [AemModelProviderComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(AemModelProviderComponent);
     component = fixture.componentInstance;

@@ -24,7 +24,7 @@ export interface DataConfig {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ModelManagerService {
   getData(cfg: DataConfig) {
