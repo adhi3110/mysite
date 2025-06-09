@@ -121,14 +121,14 @@ export class AemDirectiveComponent
           'cq' + tempKey.substring(0, 1).toUpperCase() + tempKey.substring(1);
       }
 
-      // @ts-expect-error - this is a workaround for the fact that the type of the input is already checked
+      // @ts-expect-error: this is a workaround for the fact that the type of the input is already checked
       this._component.setInput(propKey, this.cqItem()[key]);
     });
 
     this._component.setInput('cqPath', this.cqPath());
-    // @ts-expect-error - this is a workaround for the fact that the type of the input is already checked
     this._component.setInput(
       'itemName',
+      // @ts-expect-error: this is a workaround for the fact that the type of the input is already checked
       this.itemName() || (this.cqItem() && this.cqItem().id),
     );
     this.includeAppliedCSSClasses();
@@ -191,8 +191,8 @@ export class AemDirectiveComponent
    * Adds the applied css class names in to the element
    */
   private includeAppliedCSSClasses() {
-    // @ts-expect-error - this is a workaround for the fact that the type of the input is already checked
     const appliedCssClassNames =
+      // @ts-expect-error: this is a workaround for the fact that the type of the input is already checked
       this.cqItem()[Constants.APPLIED_CLASS_NAMES] || '';
 
     if (appliedCssClassNames && this._component) {

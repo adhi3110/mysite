@@ -1,27 +1,32 @@
-import {ChangeDetectionStrategy, Component, computed, input} from '@angular/core';
-import {AbstractMappedComponentDirectiveSignal} from '../component-mapping';
-import {AEMContainerComponentPropertiesSignal} from '../interface';
-import {Model} from '@adobe/aem-spa-page-model-manager';
-import {Utils} from '../utils';
-import {Constants} from '../constants';
-import {AemModelProviderComponent} from '@editable-components/aem-model-provider';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+} from '@angular/core';
+import { AbstractMappedComponentDirectiveSignal } from '../component-mapping';
+import { AEMContainerComponentPropertiesSignal } from '../interface';
+import { Model } from '@adobe/aem-spa-page-model-manager';
+import { Utils } from '../utils';
+import { Constants } from '../constants';
+import { AemModelProviderComponent } from '@editable-components/aem-model-provider';
 
 @Component({
   selector: 'aem-container',
-  imports: [
-    AemModelProviderComponent
-  ],
+  imports: [AemModelProviderComponent],
   templateUrl: './aem-container.component.html',
   styleUrl: './aem-container.component.scss',
   host: {
     '[class]': 'hostClasses',
-    '[attr.data-cq-data-path]': 'cqPath()'
+    '[attr.data-cq-data-path]': 'cqPath()',
   },
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AemContainerComponent extends AbstractMappedComponentDirectiveSignal implements AEMContainerComponentPropertiesSignal {
-
-  cqItems = input.required<{[key: string]: Model}>();
+export class AemContainerComponent
+  extends AbstractMappedComponentDirectiveSignal
+  implements AEMContainerComponentPropertiesSignal
+{
+  cqItems = input.required<Record<string, Model>>();
 
   cqItemsOrder = input.required<string[]>();
 
@@ -29,7 +34,9 @@ export class AemContainerComponent extends AbstractMappedComponentDirectiveSigna
 
   modelName = input();
 
-  placeHolderPath = computed(() => this.cqPath() + '/' + Constants.PLACEHOLDER_ITEM_NAME);
+  placeHolderPath = computed(
+    () => this.cqPath() + '/' + Constants.PLACEHOLDER_ITEM_NAME,
+  );
 
   hostClasses = Constants.CONTAINER_CLASS_NAMES;
 
@@ -54,7 +61,6 @@ export class AemContainerComponent extends AbstractMappedComponentDirectiveSigna
   }
 
   isInEditMode() {
-    return Utils.isInEditor()
+    return Utils.isInEditor();
   }
-
 }

@@ -10,17 +10,18 @@
  * governing permissions and limitations under the License.
  */
 
-import {ComponentMapping as SPAComponentMapping} from '@adobe/aem-spa-component-mapping';
-import {Directive, input, Type} from '@angular/core';
-import {EditConfigSignal, MappedComponentPropertiesSignal} from './interface';
-import {Utils} from './utils';
-
+import { ComponentMapping as SPAComponentMapping } from '@adobe/aem-spa-component-mapping';
+import { Directive, input, Type } from '@angular/core';
+import { EditConfigSignal, MappedComponentPropertiesSignal } from './interface';
+import { Utils } from './utils';
 
 /**
  * Provides standard implementation for the MappedComponentProperties using @Input
  */
 @Directive()
-export abstract class AbstractMappedComponentDirectiveSignal implements MappedComponentPropertiesSignal {
+export abstract class AbstractMappedComponentDirectiveSignal
+  implements MappedComponentPropertiesSignal
+{
   isInEditor = input(Utils.isInEditor());
 
   cqPath = input('');
@@ -37,10 +38,12 @@ export class ComponentMappingWithConfig {
   /**
    * Store of EditConfig structures
    */
-  private editConfigMap: { [key: string]: EditConfigSignal<MappedComponentPropertiesSignal>; } = {};
+  private editConfigMap: Record<
+    string,
+    EditConfigSignal<MappedComponentPropertiesSignal>
+  > = {};
 
-  constructor(private spaMapping: SPAComponentMapping) {
-  }
+  constructor(private spaMapping: SPAComponentMapping) {}
 
   /**
    * Stores a component class for the given resource types and also allows to provide an EditConfig object
@@ -49,10 +52,15 @@ export class ComponentMappingWithConfig {
    * @param [editConfig] - Edit configuration to be stored for the given resource types
    * @type Model - The Model interface / class type bound to the editconfig object.
    */
-  map<Model extends MappedComponentPropertiesSignal = any>(resourceTypes: string | string[], clazz: Type<Model>, editConfig: EditConfigSignal<Model> | null = null): void {
+  map<Model extends MappedComponentPropertiesSignal = any>(
+    resourceTypes: string | string[],
+    clazz: Type<Model>,
+    editConfig: EditConfigSignal<Model> | null = null,
+  ): void {
     const innerClass = clazz;
 
-    const resourceList = (typeof resourceTypes === 'string') ? [resourceTypes] : resourceTypes;
+    const resourceList =
+      typeof resourceTypes === 'string' ? [resourceTypes] : resourceTypes;
 
     resourceList.forEach((entry) => {
       if (editConfig) {
@@ -60,7 +68,6 @@ export class ComponentMappingWithConfig {
       }
       this.spaMapping.map(entry, innerClass);
     });
-
   }
 
   /**
@@ -70,10 +77,15 @@ export class ComponentMappingWithConfig {
    * @param [editConfig] - Edit configuration to be stored for the given resource types
    * @type Model - The Model interface / class type bound to the editconfig object.
    */
-  lazyMap<Model extends MappedComponentPropertiesSignal = any>(resourceTypes: string | string[], lazyClassFunction: () => Promise<Type<Model>>, editConfig: EditConfigSignal<Model> | null = null) {
+  lazyMap<Model extends MappedComponentPropertiesSignal = any>(
+    resourceTypes: string | string[],
+    lazyClassFunction: () => Promise<Type<Model>>,
+    editConfig: EditConfigSignal<Model> | null = null,
+  ) {
     const innerFunction = lazyClassFunction;
 
-    const resourceList = (typeof resourceTypes === 'string') ? [resourceTypes] : resourceTypes;
+    const resourceList =
+      typeof resourceTypes === 'string' ? [resourceTypes] : resourceTypes;
 
     resourceList.forEach((entry) => {
       if (editConfig) {
@@ -88,7 +100,9 @@ export class ComponentMappingWithConfig {
    * @param resourceType - Resource type for which the component class has been stored
    * @type Model - The Model interface / class type bound to the editconfig object.
    */
-  get<Model extends MappedComponentPropertiesSignal = any>(resourceType: string): Type<Model> {
+  get<Model extends MappedComponentPropertiesSignal = any>(
+    resourceType: string,
+  ): Type<Model> {
     return this.spaMapping.get(resourceType) as Type<Model>;
   }
 
@@ -97,7 +111,9 @@ export class ComponentMappingWithConfig {
    * @param resourceType - Resource type for which the component class has been stored
    * @type Model - The Model interface / class type bound to the editconfig object.
    */
-  lazyGet<Model extends MappedComponentPropertiesSignal = any>(resourceType: string): Promise<Type<Model>> {
+  lazyGet<Model extends MappedComponentPropertiesSignal = any>(
+    resourceType: string,
+  ): Promise<Type<Model>> {
     return this.spaMapping.getLazy(resourceType) as Promise<Type<Model>>;
   }
 
@@ -106,7 +122,9 @@ export class ComponentMappingWithConfig {
    * @param resourceType - Resource type for which the configuration has been stored
    * @type Model - The Model interface / class type bound to the editconfig object.
    */
-  getEditConfig<Model extends MappedComponentPropertiesSignal = any>(resourceType: string): EditConfigSignal<Model> {
+  getEditConfig<Model extends MappedComponentPropertiesSignal = any>(
+    resourceType: string,
+  ): EditConfigSignal<Model> {
     return this.editConfigMap[resourceType];
   }
 }
@@ -118,13 +136,17 @@ const componentMapping = new ComponentMappingWithConfig(SPAComponentMapping);
  * @param resourceTypes - List of resource types
  * @type Model - The Model interface / class type that will be Mapped. Bound to the EditConfig configuration.
  */
-function MapTo<Model extends MappedComponentPropertiesSignal = any>(resourceTypes: string | string[]) {
+function MapTo<Model extends MappedComponentPropertiesSignal = any>(
+  resourceTypes: string | string[],
+) {
   /**
    * @param clazz - Component class to be stored
    * @param [editConfig] - Edit configuration to be stored for the given resource types
    */
-  return (clazz: Type<Model>, editConfig: EditConfigSignal<Model> | null = null): void =>
-    componentMapping.map(resourceTypes, clazz, editConfig);
+  return (
+    clazz: Type<Model>,
+    editConfig: EditConfigSignal<Model> | null = null,
+  ): void => componentMapping.map(resourceTypes, clazz, editConfig);
 }
 
 /**
@@ -132,13 +154,18 @@ function MapTo<Model extends MappedComponentPropertiesSignal = any>(resourceType
  * @param resourceTypes - List of resource types
  * @type Model - The Model interface / class type that will be Mapped. Bound to the EditConfig configuration.
  */
-function LazyMapTo<Model extends MappedComponentPropertiesSignal = any>(resourceTypes: string | string[]) {
+function LazyMapTo<Model extends MappedComponentPropertiesSignal = any>(
+  resourceTypes: string | string[],
+) {
   /**
    * @param lazyClassPromise - Function that returns a promise resolving a class
    * @param [editConfig] - Edit configuration to be stored for the given resource types
    */
-  return (lazyClassFunction: () => Promise<Type<Model>>, editConfig: EditConfigSignal<Model> | null = null): void =>
+  return (
+    lazyClassFunction: () => Promise<Type<Model>>,
+    editConfig: EditConfigSignal<Model> | null = null,
+  ): void =>
     componentMapping.lazyMap(resourceTypes, lazyClassFunction, editConfig);
 }
 
-export {componentMapping as ComponentMapping, MapTo, LazyMapTo};
+export { componentMapping as ComponentMapping, MapTo, LazyMapTo };

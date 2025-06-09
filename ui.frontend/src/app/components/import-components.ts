@@ -1,5 +1,9 @@
-import {LazyMapTo, MapTo, AemContainerComponent, AemResponsivegridComponent} from '@editable-components';
-
+import {
+  LazyMapTo,
+  MapTo,
+  AemContainerComponent,
+  AemResponsivegridComponent,
+} from '@editable-components';
 
 // import {TitleV2Component, TitleV2IsEmptyFn} from '@adobe/aem-core-components-angular-base/authoring/title/v2';
 // import {BreadCrumbV2Component, BreadCrumbV2IsEmptyFn} from '@adobe/aem-core-components-angular-base/layout/breadcrumb/v2';
@@ -17,7 +21,6 @@ import {LazyMapTo, MapTo, AemContainerComponent, AemResponsivegridComponent} fro
 // import {LanguageNavigationV1Component} from '@adobe/aem-core-components-angular-base/layout/language-navigation/v1';
 // import {ContainerV1Component} from '@adobe/aem-core-components-angular-spa/containers/container/v1';
 // import {ContainerIsEmptyFn} from '@adobe/aem-core-components-angular-spa/core';
-
 
 // /**
 //  * Normal MapTo - maps angular components to aem models
@@ -54,21 +57,18 @@ import {LazyMapTo, MapTo, AemContainerComponent, AemResponsivegridComponent} fro
 // );
 // LazyMapTo('mysite/components/carousel')(CarouselV1Component);
 
-
 const TextEditConfig = {
   emptyLabel: 'Text is empty',
-  isEmpty: (cqModel: any) : boolean =>
-    !cqModel() || !cqModel().text || cqModel().text.trim().length < 1
+  isEmpty: (cqModel: any): boolean =>
+    !cqModel() || !cqModel().text || cqModel().text.trim().length < 1,
 };
 
-const LazyTextModule = () => import('./text/text.component').then(
-  Module => Module.TextComponent
-);
+const LazyTextModule = () =>
+  import('./text/text.component').then((Module) => Module.TextComponent);
 
 LazyMapTo('mysite/components/text')(LazyTextModule, TextEditConfig);
 
 // MapTo('mysite/components/text')(TextComponent, TextEditConfig);
-
 
 MapTo('mysite/components/spa')(AemContainerComponent);
 
