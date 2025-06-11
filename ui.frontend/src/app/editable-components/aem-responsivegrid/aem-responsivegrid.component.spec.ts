@@ -1,3 +1,4 @@
+import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AemResponsivegridComponent } from '@editable-components';
@@ -9,6 +10,7 @@ describe('AemResponsivegridComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AemResponsivegridComponent],
+      providers: [provideZonelessChangeDetection()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AemResponsivegridComponent);

@@ -1,3 +1,4 @@
+import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AemAllowedComponentsContainerComponent } from '@editable-components';
@@ -9,6 +10,7 @@ describe('AemAllowedComponentsContainerComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AemAllowedComponentsContainerComponent],
+      providers: [provideZonelessChangeDetection()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AemAllowedComponentsContainerComponent);

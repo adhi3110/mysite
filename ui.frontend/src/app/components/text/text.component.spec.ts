@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TextComponent } from './text.component';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('TextComponent', () => {
   let component: TextComponent;
@@ -9,6 +10,7 @@ describe('TextComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [TextComponent],
+      providers: [provideZonelessChangeDetection()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TextComponent);

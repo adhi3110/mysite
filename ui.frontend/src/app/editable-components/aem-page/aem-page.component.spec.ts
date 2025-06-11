@@ -1,17 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AemPageComponent } from './aem-page.component';
+import { AEMPageComponent } from './aem-page.component';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('AemPageComponent', () => {
-  let component: AemPageComponent;
-  let fixture: ComponentFixture<AemPageComponent>;
+  let component: AEMPageComponent;
+  let fixture: ComponentFixture<AEMPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AemPageComponent],
+      imports: [AEMPageComponent],
+      providers: [provideZonelessChangeDetection()],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AemPageComponent);
+    fixture = TestBed.createComponent(AEMPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
